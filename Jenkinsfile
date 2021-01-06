@@ -4,7 +4,7 @@ node {
             echo "Master will get execute"
         } else {
             echo "Develop will get execute"
-            git[url: 'https://github.com/Giritharan92/time-tracker.git', branch: 'develop']
+            ["git", "clone", "https://github.com/Giritharan92/time-tracker.git"].execute()
         }
     }
 }

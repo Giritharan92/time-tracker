@@ -1,24 +1,11 @@
-pipeline {
-    agent any
-
-    environment {
-        secret = credentials('SECRET_PWD')
+node {
+    stage('SCM Checkout'){
+        
+        git 'https://github.com/Giritharan92/time-tracker.git'
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'echo $secret'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying'
-            }
-        }
+    stage('Compile-Package'){
+        def mvnHome = tool name: 'Maven-3.2.5', type: 'maven'
+        sh "${mvnHome}/bin/mvn package"
+        sh 'mvn package'
     }
 }
